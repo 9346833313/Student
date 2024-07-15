@@ -15,4 +15,8 @@ public interface StudentService {
 	public ResponseEntity<?> updateUser(Student student, long id);
 
 	public ResponseEntity<?> delete(long id);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 48f9b3d1c6498319e7b56538aa7b7d79f24133e3
 }

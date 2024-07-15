@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.student.entity.Student;
 import com.example.student.service.StudentService;
 
-
-
 @RequestMapping("/api/students")
 @RestController
 public class StudentController {
@@ -26,19 +24,11 @@ public class StudentController {
 	public ResponseEntity<?> save(@RequestBody Student student) {
 		return studentService.createStudent(student);
 	}
+
 	@GetMapping
 	public ResponseEntity<?> getAllStudents() {
 		return studentService.getStudent();
-	}
 
-
-
-
-
-	
-
-
-	
 	@GetMapping("{id}")
 	public ResponseEntity<?> getById(@PathVariable long id) {
 		return studentService.getById(id);
@@ -47,9 +37,6 @@ public class StudentController {
 	@PutMapping("{id}")
 	public ResponseEntity<?> updateUser(@RequestBody Student student, @PathVariable long id) {
 		return studentService.updateUser(student, id);
-
-
-
 
 	}
 

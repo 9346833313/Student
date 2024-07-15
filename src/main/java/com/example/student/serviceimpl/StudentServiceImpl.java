@@ -67,7 +67,10 @@ public class StudentServiceImpl implements StudentService {
 		} else {
 			return new ResponseEntity<>("id not found", HttpStatus.BAD_REQUEST);
 		}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 48f9b3d1c6498319e7b56538aa7b7d79f24133e3
 	}
 
 }
