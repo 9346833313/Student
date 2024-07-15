@@ -19,15 +19,16 @@ public class StudentServiceImpl implements StudentService {
 	private StudentRepo studentRepo;
 
 	@Override
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5e38a7dc1098f8d60417182276111e24c9ada5fa
 	public ResponseEntity<?> createStudent(Student student) {
-
 		return new ResponseEntity<>(studentRepo.save(student), HttpStatus.CREATED);
 	}
 
 	@Override
 	public ResponseEntity<?> getStudent() {
-
 		return new ResponseEntity<>(studentRepo.findAll(), HttpStatus.OK);
 	}
 
@@ -55,6 +56,22 @@ public class StudentServiceImpl implements StudentService {
 		} else {
 			return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
 		}
+<<<<<<< HEAD
+=======
+	}
+
+	@Override
+	public ResponseEntity<?> delete(long id) {
+		Optional<Student> findById = studentRepo.findById(id);
+		if (findById.isPresent()) {
+			Student std = findById.get();
+
+			return new ResponseEntity<>(std, HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<>("id not found", HttpStatus.BAD_REQUEST);
+		}
+>>>>>>> 5e38a7dc1098f8d60417182276111e24c9ada5fa
 	}
 
 }
