@@ -73,7 +73,7 @@ public class StudentServiceImpl implements StudentService {
 
 	// Student details get by id - serviceImpl class
 	@Override
-	public ResponseEntity<ResponseDto> getById(long id) {
+	public ResponseEntity<?> getById(long id) {
 		Optional<Student> findById = studentRepo.findById(id);
 		if (findById.isPresent()) {
 			Student student = findById.get();
@@ -98,7 +98,7 @@ public class StudentServiceImpl implements StudentService {
 
 	// Student details update by id - serviceImpl class
 	@Override
-	public ResponseEntity<ResponseDto> updateUser(StudentDTO studentDto, long id) {
+	public ResponseEntity<?> updateUser(StudentDTO studentDto, long id) {
 		Optional<Student> findById = studentRepo.findById(id);
 		if (findById.isPresent()) {
 			Student existingStudent = findById.get();
