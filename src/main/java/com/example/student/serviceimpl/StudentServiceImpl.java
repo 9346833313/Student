@@ -19,6 +19,7 @@ public class StudentServiceImpl implements StudentService {
 	private StudentRepo studentRepo;
 
 	@Override
+
 	public ResponseEntity<?> createStudent(Student student) {
 		return new ResponseEntity<>(studentRepo.save(student), HttpStatus.CREATED);
 	}
@@ -52,6 +53,7 @@ public class StudentServiceImpl implements StudentService {
 		} else {
 			return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
 		}
+
 	}
 
 	@Override
