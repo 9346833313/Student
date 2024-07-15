@@ -18,6 +18,20 @@ public class FacultyServiceImpl implements FacultyService {
 
 	@Autowired
 	private FacultyRepository facultyRepository;
+	
+	@Override
+	public ResponseEntity<?> createFaculty(FacultyReqDto facultyReqDto) {
+
+		Faculty faculty = new Faculty();
+
+		faculty.setId(facultyReqDto.getId());
+		faculty.setFname(facultyReqDto.getFname());
+		faculty.setFsubject(facultyReqDto.getFsubject());
+		faculty.setDescription(facultyReqDto.getDescription());
+		facultyRepository.save(faculty);
+
+		return new ResponseEntity<>("Faculty Saved Successfully", HttpStatus.OK);
+	}
 
 	@Override
 	public List<Faculty> getAllFaculty() {
@@ -36,19 +50,7 @@ public class FacultyServiceImpl implements FacultyService {
 		facultyRepository.deleteById(id);
 	}
 
-	@Override
-	public ResponseEntity<?> createFaculty(FacultyReqDto facultyReqDto) {
-
-		Faculty faculty = new Faculty();
-
-		faculty.setId(facultyReqDto.getId());
-		faculty.setFname(facultyReqDto.getFname());
-		faculty.setFsubject(facultyReqDto.getFsubject());
-		faculty.setDescription(facultyReqDto.getDescription());
-		facultyRepository.save(faculty);
-
-		return new ResponseEntity<>("Faculty Saved Successfully", HttpStatus.OK);
-	}
+	
 
 	@Override
 	public ResponseEntity<?> updateFaculty(Long id, FacultyReqDto facultyReqDto) {
