@@ -22,6 +22,12 @@ public class FacultyController {
 	@Autowired
 	private FacultyService facultyService;
 
+	@PostMapping("faculty/create")
+	ResponseEntity<?> createFaculty(FacultyReqDto facultyReqDto) {
+		return facultyService.createFaculty(facultyReqDto);
+
+	}
+
 	@GetMapping("faculty/{id}")
 	public ResponseEntity<Faculty> getFacultyId(@PathVariable("id") Long facultyId) {
 		Faculty faculty = facultyService.getFacultyById(facultyId);
@@ -36,22 +42,16 @@ public class FacultyController {
 
 	}
 
-	@DeleteMapping("faculty/{id}")
-	public ResponseEntity<String> deleteFaculty(@PathVariable("id") Long facultyId) {
-		facultyService.deleteFacultyById(facultyId);
-		return new ResponseEntity<>("Faculty Id successfully deleted!", HttpStatus.OK);
-	}
-
-	@PostMapping("faculty/create")
-	ResponseEntity<?> createFaculty(FacultyReqDto facultyReqDto) {
-		return facultyService.createFaculty(facultyReqDto);
-
-	}
-
 	@PostMapping("faculty/{id}")
 	ResponseEntity<?> updateFaculty(Long id, FacultyReqDto facultyReqDto) {
 		return facultyService.updateFaculty(id, facultyReqDto);
 
+	}
+
+	@DeleteMapping("faculty/{id}")
+	public ResponseEntity<String> deleteFaculty(@PathVariable("id") Long facultyId) {
+		facultyService.deleteFacultyById(facultyId);
+		return new ResponseEntity<>("Faculty Id successfully deleted!", HttpStatus.OK);
 	}
 
 }

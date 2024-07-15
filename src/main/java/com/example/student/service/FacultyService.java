@@ -11,11 +11,11 @@ public interface FacultyService {
 
 	ResponseEntity<?> createFaculty(FacultyReqDto facultyReqDto);
 
-	ResponseEntity<?> updateFaculty(Long id, FacultyReqDto facultyReqDto);
+	public Faculty getFacultyById(long id);
 
 	public List<Faculty> getAllFaculty();
 
-	public Faculty getFacultyById(long id);
+	ResponseEntity<?> updateFaculty(Long id, FacultyReqDto facultyReqDto);
 
 	public void deleteFacultyById(long id);
 
