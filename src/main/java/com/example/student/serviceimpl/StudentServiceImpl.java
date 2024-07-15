@@ -5,8 +5,6 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +51,19 @@ public class StudentServiceImpl implements StudentService {
 			return new ResponseEntity<>("Student updated successfully", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@Override
+	public ResponseEntity<?> delete(long id) {
+		Optional<Student> findById = studentRepo.findById(id);
+		if (findById.isPresent()) {
+			Student std = findById.get();
+
+			return new ResponseEntity<>(std, HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<>("id not found", HttpStatus.BAD_REQUEST);
 		}
 	}
 

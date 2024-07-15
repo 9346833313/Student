@@ -2,6 +2,7 @@ package com.example.student.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.student.entity.Student;
 import com.example.student.service.StudentService;
 
-@RestController
+
+
 @RequestMapping("/api/students")
+@RestController
 public class StudentController {
 	@Autowired
 	private StudentService studentService;
@@ -28,6 +31,7 @@ public class StudentController {
 		return studentService.getStudent();
 	}
 
+	
 	@GetMapping("{id}")
 	public ResponseEntity<?> getById(@PathVariable long id) {
 		return studentService.getById(id);
@@ -38,4 +42,11 @@ public class StudentController {
 		return studentService.updateUser(student, id);
 
 	}
+
+	@DeleteMapping("{id}")
+	public ResponseEntity<?> delete(@PathVariable long id) {
+		return studentService.delete(id);
+
+	}
+
 }
