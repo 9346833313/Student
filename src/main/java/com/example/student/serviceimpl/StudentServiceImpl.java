@@ -44,4 +44,19 @@ public class StudentServiceImpl implements StudentService {
 		}
 	}
 
-}
+	@Override
+	public ResponseEntity<?> delete(long id) {
+		Optional<Student> findById =studentRepo.findById(id);
+		if (findById.isPresent()) {
+			Student std = findById.get();
+
+			return new ResponseEntity<>(std, HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<>("id not found", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	}
+
+

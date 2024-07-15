@@ -8,4 +8,6 @@ public interface StudentService {
 	public ResponseEntity<?> getById(long id);
 
 	public ResponseEntity<?> updateUser(Student student, long id);
-}
+	
+	public ResponseEntity<?> delete(long id);
+	}
