@@ -85,7 +85,7 @@ public class FacultyServiceImpl implements FacultyService {
 			} else {
 				response.setStatusCode(400);
 				response.setIsError(true);
-				response.setResult(new ResponseMessage("User not found with id: " + id));
+				response.setResult(new ResponseMessage("Faculty not found with id: " + id));
 				return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
