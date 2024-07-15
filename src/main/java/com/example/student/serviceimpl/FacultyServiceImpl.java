@@ -1,5 +1,6 @@
 package com.example.student.serviceimpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,26 @@ import com.example.student.service.FacultyServie;
 @Service
 public class FacultyServiceImpl implements FacultyServie {
 
-	
+	@Autowired
+	private FacultyRepository facultyRepository;
+
+	@Override
+	public List<Faculty> getAllFaculty() {
+		return facultyRepository.findAll();
+	}
+
+	@Override
+	public Faculty getFacultyById(long id) {
+		Optional<Faculty> optionalFaculty = facultyRepository.findById(id);
+		return optionalFaculty.get();
+	}
+
+	@Override
+	public void deleteFacultyById(long id) {
+		// TODO Auto-generated method stub
+		facultyRepository.deleteById(id);
+	}
+
 
 	@Override
 	public ResponseEntity<?> createFaculty(FacultyReqDto facultyReqDto) {
@@ -26,7 +46,7 @@ public class FacultyServiceImpl implements FacultyServie {
 		faculty.setFname(facultyReqDto.getFname());
 		faculty.setFsubject(facultyReqDto.getFsubject());
 		faculty.setDescription(facultyReqDto.getDescription());
-		//facultyRepository.save(faculty);
+		facultyRepository.save(faculty);
 
 		return new ResponseEntity<>("Faculty Saved Successfully", HttpStatus.OK);
 	}
@@ -34,18 +54,17 @@ public class FacultyServiceImpl implements FacultyServie {
 	@Override
 	public ResponseEntity<?> updateFaculty(Long id, FacultyReqDto facultyReqDto) {
 
-//		Optional<Faculty> findById = facultyRepository.findById(id);
-//		if (!findById.isPresent()) {
-//			return new ResponseEntity<>("Faculty not found", HttpStatus.NOT_FOUND);
-//		}
-//
-//		Faculty faculty = findById.get();
-//		faculty.setFname(facultyReqDto.getFname());
-//		faculty.setFsubject(facultyReqDto.getFsubject());
-//		faculty.setDescription(facultyReqDto.getDescription());
-////		facultyRepository.save(faculty);
+		Optional<Faculty> findById = facultyRepository.findById(id);
+		if (!findById.isPresent()) {
+			return new ResponseEntity<>("Faculty not found", HttpStatus.NOT_FOUND);
+		}
+
+		Faculty faculty = findById.get();
+		faculty.setFname(facultyReqDto.getFname());
+		faculty.setFsubject(facultyReqDto.getFsubject());
+		faculty.setDescription(facultyReqDto.getDescription());
+		facultyRepository.save(faculty);
 
 		return new ResponseEntity<>("Faculty Updated Successfully", HttpStatus.OK);
 	}
-
 }
