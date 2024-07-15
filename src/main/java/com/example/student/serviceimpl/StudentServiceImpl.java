@@ -3,7 +3,6 @@ package com.example.student.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -113,9 +112,11 @@ public class StudentServiceImpl implements StudentService {
 			responseDto.setIsError(false);
 			responseDto.setResult(new ResponseMessage("Student updated successfully"));
 			return ResponseEntity.ok(responseDto);
-		} else
 
-		{
+		}
+
+		else {
+
 			ResponseDto responseDto = new ResponseDto();
 			responseDto.setStatusCode(HttpStatus.NOT_FOUND.value());
 			responseDto.setIsError(true);

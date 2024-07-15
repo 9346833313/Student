@@ -8,10 +8,11 @@ import com.example.student.ResDto.ResponseDto;
 
 
 
+
 public interface StudentService {
 
-	public ResponseEntity<?> createStudent(StudentDTO studentDTO);
 
+	public ResponseEntity<?> createStudent(StudentDTO studentDTO);
 
 
 	public ResponseEntity<?> getStudent();
