@@ -31,7 +31,7 @@ public class StudentServiceImpl implements StudentService {
 		return new ResponseEntity<>(studentRepo.findAll(), HttpStatus.OK);
 	}
 	
-	// Student details get by id - serviceImpl
+	// Student details get by id - serviceImpl class
 	@Override
     public ResponseEntity<ResponseDto> getById(long id) {
         Optional<Student> findById = studentRepo.findById(id);
@@ -56,7 +56,7 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
-	// Student details update by id - serviceImpl
+	// Student details update by id - serviceImpl class
     @Override
     public ResponseEntity<ResponseDto> updateUser(StudentDTO studentDto, long id) {
         Optional<Student> findById = studentRepo.findById(id);

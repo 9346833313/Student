@@ -11,9 +11,9 @@ public interface StudentService {
 	public ResponseEntity<?> createStudent(Student student);
 
 	public ResponseEntity<?> getStudent();
-	// Student details get by id - serviceImpl
+	// Student details get by id - service interface
 	public ResponseEntity<ResponseDto> getById(long id);
-	// Student details update by id - serviceImpl
+	// Student details update by id - service interface
 	public ResponseEntity<ResponseDto> updateUser(StudentDTO studentDto, long id);
 
 	public ResponseEntity<?> delete(long id);
