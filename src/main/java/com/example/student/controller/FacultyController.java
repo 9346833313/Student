@@ -43,7 +43,7 @@ public class FacultyController {
 
 	}
 
-	@PostMapping("facultys/{id}")
+	@PostMapping("facultys/update")
 	ResponseEntity<?> updateFaculty(@RequestBody FacultyReqDto facultyReqDto) {
 		return facultyService.updateFaculty(facultyReqDto);
 
