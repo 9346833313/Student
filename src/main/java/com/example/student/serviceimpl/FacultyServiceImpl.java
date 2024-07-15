@@ -165,7 +165,7 @@ public class FacultyServiceImpl implements FacultyService {
 	 * 
 	 */
 	@Override
-	public ResponseEntity<ResponseDto> deleteFacultyId(long facultyId) {
+	public ResponseEntity<?> deleteFacultyId(long facultyId) {
 		ResponseDto response = new ResponseDto();
 		try {
 			Optional<Faculty> faculty = facultyRepository.findById(facultyId);
