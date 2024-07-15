@@ -91,7 +91,8 @@ public class FacultyServiceImpl implements FacultyService {
 		} catch (Exception e) {
 			response.setStatusCode(500);
 			response.setIsError(true);
-			response.setResult(new ResponseMessage("An unexpected error occurred. Please try again later."));
+			response.setResult(new ResponseMessage(
+					"Technical Error Occured, Unable to save Faculty. Error Message: " + e.getMessage()));
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -163,6 +164,7 @@ public class FacultyServiceImpl implements FacultyService {
 	/**
 	 * This method is used to delete the faculty from database based on id
 	 * 
+	 * @param facultyId
 	 */
 	@Override
 	public ResponseEntity<?> deleteFacultyId(long facultyId) {
