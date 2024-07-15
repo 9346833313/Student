@@ -23,7 +23,14 @@ public class FacultyController {
 	@Autowired
 	private FacultyService facultyService;
 
-	@PostMapping("facultys")
+	/**
+	 * This method is used to call the CreateFaculty method which is present in
+	 * facultyService interface.
+	 * 
+	 * @param facultyReqDto contains faculty details
+	 * @return response object
+	 */
+	@PostMapping("facultys/create")
 	ResponseEntity<?> createFaculty(@RequestBody FacultyReqDto facultyReqDto) {
 		return facultyService.createFaculty(facultyReqDto);
 
@@ -43,10 +50,16 @@ public class FacultyController {
 
 	}
 
+	/**
+	 * This method is used to call the update faculty method which is present in
+	 * facultyService Interface
+	 * 
+	 * @param facultyReqDto contains faculty details
+	 * @return response object
+	 */
 	@PostMapping("facultys/update")
 	ResponseEntity<?> updateFaculty(@RequestBody FacultyReqDto facultyReqDto) {
 		return facultyService.updateFaculty(facultyReqDto);
-
 	}
 
 	@DeleteMapping("facultys/{id}")
