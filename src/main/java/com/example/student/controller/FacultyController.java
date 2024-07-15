@@ -18,38 +18,38 @@ import com.example.student.entity.Faculty;
 import com.example.student.service.FacultyService;
 
 @RestController
-@RequestMapping("/Faculty")
+@RequestMapping("/api")
 public class FacultyController {
 	@Autowired
 	private FacultyService facultyService;
 
-	@PostMapping("faculty/create")
+	@PostMapping("facultys")
 	ResponseEntity<?> createFaculty(@RequestBody FacultyReqDto facultyReqDto) {
 		return facultyService.createFaculty(facultyReqDto);
 
 	}
 
-	@GetMapping("faculty/{id}")
+	@GetMapping("facultys/{id}")
 	public ResponseEntity<Faculty> getFacultyId(@PathVariable("id") Long facultyId) {
 		Faculty faculty = facultyService.getFacultyById(facultyId);
 		return new ResponseEntity<>(faculty, HttpStatus.OK);
 
 	}
 
-	@GetMapping("/faculty")
+	@GetMapping("/facultys")
 	public ResponseEntity<List<Faculty>> getAllFaculty() {
 		List<Faculty> list = facultyService.getAllFaculty();
 		return new ResponseEntity<List<Faculty>>(list, HttpStatus.OK);
 
 	}
 
-	@PostMapping("faculty/update")
+	@PostMapping("facultys/{id}")
 	ResponseEntity<?> updateFaculty(@RequestBody FacultyReqDto facultyReqDto) {
 		return facultyService.updateFaculty(facultyReqDto);
 
 	}
 
-	@DeleteMapping("faculty/{id}")
+	@DeleteMapping("facultys/{id}")
 	public ResponseEntity<String> deleteFaculty(@PathVariable("id") Long facultyId) {
 		facultyService.deleteFacultyById(facultyId);
 		return new ResponseEntity<>("Faculty Id successfully deleted!", HttpStatus.OK);

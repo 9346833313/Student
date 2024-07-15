@@ -18,7 +18,7 @@ public class FacultyServiceImpl implements FacultyService {
 
 	@Autowired
 	private FacultyRepository facultyRepository;
-	
+
 	@Override
 	public ResponseEntity<?> createFaculty(FacultyReqDto facultyReqDto) {
 
@@ -34,23 +34,15 @@ public class FacultyServiceImpl implements FacultyService {
 	}
 
 	@Override
-	public List<Faculty> getAllFaculty() {
-		return facultyRepository.findAll();
-	}
-
-	@Override
 	public Faculty getFacultyById(long id) {
 		Optional<Faculty> optionalFaculty = facultyRepository.findById(id);
 		return optionalFaculty.get();
 	}
 
 	@Override
-	public void deleteFacultyById(long id) {
-		// TODO Auto-generated method stub
-		facultyRepository.deleteById(id);
+	public List<Faculty> getAllFaculty() {
+		return facultyRepository.findAll();
 	}
-
-	
 
 	@Override
 	public ResponseEntity<?> updateFaculty(FacultyReqDto facultyReqDto) {
@@ -68,4 +60,10 @@ public class FacultyServiceImpl implements FacultyService {
 
 		return new ResponseEntity<>("Faculty Updated Successfully", HttpStatus.OK);
 	}
+
+	@Override
+	public void deleteFacultyById(long id) {
+		facultyRepository.deleteById(id);
+	}
+
 }
