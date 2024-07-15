@@ -15,12 +15,16 @@ import com.example.student.ResDto.ResponseMessage;
 import com.example.student.entity.Faculty;
 import com.example.student.repository.FacultyRepository;
 import com.example.student.service.FacultyService;
+import com.example.student.service.FacultyValidationService;
 
 @Service
 public class FacultyServiceImpl implements FacultyService {
 
 	@Autowired
 	private FacultyRepository facultyRepository;
+
+	@Autowired
+	FacultyValidationService facultyValidationService;
 
 	/**
 	 * This method is used to create faculty details and save in Faculty table.
@@ -35,6 +39,16 @@ public class FacultyServiceImpl implements FacultyService {
 			Faculty faculty = new Faculty();
 
 			faculty.setId(facultyReqDto.getId());
+
+			boolean validFName = facultyValidationService.isValidFName(facultyReqDto.getFname());
+			if (!validFName) {
+				response.setStatusCode(400);
+				response.setIsError(true);
+				response.setResult(new ResponseMessage(
+						"FName must be between 1 to 30 characters and only alphabets , “.” and “'” are allowed, should not begin or end with dot"));
+				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+			}
+
 			faculty.setFname(facultyReqDto.getFname());
 			faculty.setFsubject(facultyReqDto.getFsubject());
 			faculty.setDescription(facultyReqDto.getDescription());
