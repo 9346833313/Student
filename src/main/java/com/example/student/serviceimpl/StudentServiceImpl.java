@@ -1,9 +1,10 @@
 package com.example.student.serviceimpl;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,22 @@ import com.example.student.service.StudentService;
 @Service
 public class StudentServiceImpl implements StudentService {
 
+
 	@Autowired
 	private StudentRepo studentRepo;
 
 	@Override
+	public ResponseEntity<?> createStudent(Student student) {
+
+		return new ResponseEntity<>(studentRepo.save(student), HttpStatus.CREATED);
+	}
+
+	@Override
+	public ResponseEntity<?> getStudent() {
+
+		return new ResponseEntity<>(studentRepo.findAll(), HttpStatus.OK);
+	}
+		
 	public ResponseEntity<?> getById(long id) {
 		Optional<Student> findById = studentRepo.findById(id);
 		if (findById.isPresent()) {
