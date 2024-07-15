@@ -3,8 +3,11 @@ package com.example.student.serviceimpl;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Service;
+
 import com.example.student.service.StudentValidation;
 
+@Service
 public class StudentValidationImpl implements StudentValidation {
 
 	@Override
@@ -22,11 +25,10 @@ public class StudentValidationImpl implements StudentValidation {
 
 	@Override
 	public Boolean isValidRollNo(long rollNo) {
-	    String regex = "^[0-9]{1,4}$";  
-	    Pattern pattern = Pattern.compile(regex);
-	    Matcher matcher = pattern.matcher(String.valueOf(rollNo));
-	    return matcher.matches();
+		String regex = "^[0-9]{1,4}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(String.valueOf(rollNo));
+		return matcher.matches();
 	}
-
 
 }
