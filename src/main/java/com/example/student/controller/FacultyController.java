@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class FacultyController {
 	private FacultyService facultyService;
 
 	@PostMapping("faculty/create")
-	ResponseEntity<?> createFaculty(FacultyReqDto facultyReqDto) {
+	ResponseEntity<?> createFaculty(@RequestBody FacultyReqDto facultyReqDto) {
 		return facultyService.createFaculty(facultyReqDto);
 
 	}
@@ -42,9 +43,9 @@ public class FacultyController {
 
 	}
 
-	@PostMapping("faculty/{id}")
-	ResponseEntity<?> updateFaculty(Long id, FacultyReqDto facultyReqDto) {
-		return facultyService.updateFaculty(id, facultyReqDto);
+	@PostMapping("faculty/update")
+	ResponseEntity<?> updateFaculty(@RequestBody FacultyReqDto facultyReqDto) {
+		return facultyService.updateFaculty(facultyReqDto);
 
 	}
 

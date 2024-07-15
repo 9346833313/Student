@@ -15,7 +15,7 @@ public interface FacultyService {
 
 	public List<Faculty> getAllFaculty();
 
-	ResponseEntity<?> updateFaculty(Long id, FacultyReqDto facultyReqDto);
+	ResponseEntity<?> updateFaculty(FacultyReqDto facultyReqDto);
 
 	public void deleteFacultyById(long id);
 

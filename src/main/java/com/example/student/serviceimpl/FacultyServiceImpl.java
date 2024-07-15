@@ -53,9 +53,9 @@ public class FacultyServiceImpl implements FacultyService {
 	
 
 	@Override
-	public ResponseEntity<?> updateFaculty(Long id, FacultyReqDto facultyReqDto) {
+	public ResponseEntity<?> updateFaculty(FacultyReqDto facultyReqDto) {
 
-		Optional<Faculty> findById = facultyRepository.findById(id);
+		Optional<Faculty> findById = facultyRepository.findById(facultyReqDto.getId());
 		if (!findById.isPresent()) {
 			return new ResponseEntity<>("Faculty not found", HttpStatus.NOT_FOUND);
 		}
