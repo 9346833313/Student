@@ -1,5 +1,32 @@
 package com.example.student.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.student.entity.Student;
+import com.example.student.service.StudentService;
+
+@RestController
+@RequestMapping("/api/students")
 public class StudentController {
 
+	@Autowired
+	private StudentService studentService;
+
+	@GetMapping("{id}")
+	public ResponseEntity<?> getById(@PathVariable long id) {
+		return studentService.getById(id);
+	}
+
+	@PutMapping("{id}")
+	public ResponseEntity<?> updateUser(@RequestBody Student student, @PathVariable long id) {
+		return studentService.updateUser(student, id);
+
+	}
 }
