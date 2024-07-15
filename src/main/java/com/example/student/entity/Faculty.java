@@ -11,8 +11,8 @@ public class Faculty {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String Fname;
-	private String Fsubject;
+	private String fname;
+	private String fsubject;
 	private String description;
 
 	public long getId() {
@@ -24,19 +24,19 @@ public class Faculty {
 	}
 
 	public String getFname() {
-		return Fname;
+		return fname;
 	}
 
 	public void setFname(String fname) {
-		Fname = fname;
+		this.fname = fname;
 	}
 
 	public String getFsubject() {
-		return Fsubject;
+		return fsubject;
 	}
 
 	public void setFsubject(String fsubject) {
-		Fsubject = fsubject;
+		this.fsubject = fsubject;
 	}
 
 	public String getDescription() {
