@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import com.example.student.Dto.FacultyReqDto;
 import com.example.student.entity.Faculty;
 import com.example.student.repository.FacultyRepository;
-import com.example.student.service.FacultyServie;
+import com.example.student.service.FacultyService;
 
 @Service
-public class FacultyServiceImpl implements FacultyServie {
+public class FacultyServiceImpl implements FacultyService {
 
 	@Autowired
 	private FacultyRepository facultyRepository;
@@ -35,7 +35,6 @@ public class FacultyServiceImpl implements FacultyServie {
 		// TODO Auto-generated method stub
 		facultyRepository.deleteById(id);
 	}
-
 
 	@Override
 	public ResponseEntity<?> createFaculty(FacultyReqDto facultyReqDto) {
