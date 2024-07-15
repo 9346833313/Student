@@ -1,22 +1,23 @@
 package com.example.student.service;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 
 import com.example.student.Dto.FacultyReqDto;
-import com.example.student.entity.Faculty;
 
 public interface FacultyService {
 
 	ResponseEntity<?> createFaculty(FacultyReqDto facultyReqDto);
 
-	public Faculty getFacultyById(long id);
+	// Method to find a faculty member by their ID, returning a ResponseEntity with
+	// the faculty member and HTTP status.
+	ResponseEntity<?> findFacultyById(Long facultyId);
 
-	public List<Faculty> getAllFaculty();
+	ResponseEntity<?> getAllFaculty();
 
 	ResponseEntity<?> updateFaculty(FacultyReqDto facultyReqDto);
 
-	public void deleteFacultyById(long id);
+	// Method to delete a faculty member by their ID, returning a ResponseEntity
+	// indicating the outcome.
+	ResponseEntity<?> deleteFacultyId(long id);
 
 }

@@ -1,9 +1,7 @@
 package com.example.student.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.student.Dto.FacultyReqDto;
-import com.example.student.entity.Faculty;
+
 import com.example.student.service.FacultyService;
 
 @RestController
@@ -36,18 +34,18 @@ public class FacultyController {
 
 	}
 
-	@GetMapping("facultys/{id}")
-	public ResponseEntity<Faculty> getFacultyId(@PathVariable("id") Long facultyId) {
-		Faculty faculty = facultyService.getFacultyById(facultyId);
-		return new ResponseEntity<>(faculty, HttpStatus.OK);
-
+	/**
+	 * Endpoint to find a faculty member by their ID. Map GET requests to
+	 * /facultys/{id} Call the service method to find the faculty member by ID
+	 */
+	@GetMapping("/facultys/{id}")
+	public ResponseEntity<?> findFacultyById(@PathVariable Long id) {
+		return facultyService.findFacultyById(id);
 	}
 
-	@GetMapping("/facultys")
-	public ResponseEntity<List<Faculty>> getAllFaculty() {
-		List<Faculty> list = facultyService.getAllFaculty();
-		return new ResponseEntity<List<Faculty>>(list, HttpStatus.OK);
-
+	@GetMapping("/facultys/all")
+	public ResponseEntity<?> getAllFaculty() {
+		return facultyService.getAllFaculty();
 	}
 
 	/**
@@ -62,10 +60,13 @@ public class FacultyController {
 		return facultyService.updateFaculty(facultyReqDto);
 	}
 
-	@DeleteMapping("facultys/{id}")
-	public ResponseEntity<String> deleteFaculty(@PathVariable("id") Long facultyId) {
-		facultyService.deleteFacultyById(facultyId);
-		return new ResponseEntity<>("Faculty Id successfully deleted!", HttpStatus.OK);
+	/**
+	 * Endpoint to delete a faculty member by their ID. Map DELETE requests to
+	 * /facultys/{id} Call the service method to delete the faculty member by ID
+	 */
+	@DeleteMapping("/facultys/{id}")
+	public ResponseEntity<?> deleteFaculty(@PathVariable long id) {
+		return facultyService.deleteFacultyId(id);
 	}
 
 }
