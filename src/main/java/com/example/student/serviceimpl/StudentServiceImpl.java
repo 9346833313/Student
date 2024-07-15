@@ -15,12 +15,16 @@ import com.example.student.ResDto.ResponseMessage;
 import com.example.student.entity.Student;
 import com.example.student.repository.StudentRepo;
 import com.example.student.service.StudentService;
+import com.example.student.service.StudentValidation;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	private StudentRepo studentRepo;
+
+	@Autowired
+	private StudentValidation studentValidation;
 
 	@Override
 
@@ -31,7 +35,39 @@ public class StudentServiceImpl implements StudentService {
 
 	public ResponseEntity<?> createStudent(StudentDTO studentDTO) {
 		ResponseDto response = new ResponseDto();
+
 		try {
+			// checking existing database for name
+			Optional<Student> findByRollNo = studentRepo.findByRollNo(studentDTO.getRollNo());
+			if (findByRollNo.isPresent()) {
+				response.setIsError(true);
+				response.setStatusCode(400);
+				response.setResult(new ResponseMessage("roll no is already present"));
+				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+			}
+			// validations for name
+
+			if (studentDTO.getName() != null) {
+				Boolean validname = studentValidation.isValidname(studentDTO.getName());
+				if (!validname) {
+					response.setIsError(true);
+					response.setStatusCode(400);
+					response.setResult(new ResponseMessage("provide valid name with limitations"));
+					return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+				}
+			}
+			// validations for roll no
+			Long rollNo = studentDTO.getRollNo();
+			if (rollNo != null) {
+				Boolean validRollNo = studentValidation.isValidRollNo(studentDTO.getRollNo());
+				if (!validRollNo) {
+					response.setIsError(true);
+					response.setStatusCode(400);
+					response.setResult(new ResponseMessage("provide valid name with limitations"));
+					return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+				}
+			}
+
 			Student student = new Student();
 			studentDTO.setName(student.getName());
 			studentDTO.setRollNo(studentDTO.getRollNo());
