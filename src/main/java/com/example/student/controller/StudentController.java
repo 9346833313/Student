@@ -3,30 +3,8 @@ package com.example.student.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.example.student.entity.Student;
-import com.example.student.service.StudentService;
-
-@RequestMapping
-@RestController
-public class StudentController {
-	@Autowired
-	private StudentService studentService;
-
-	@PostMapping
-	public ResponseEntity<?> save(@RequestBody Student student) {
-		return studentService.createStudent(student);
-	}
-	@GetMapping
-	public ResponseEntity<?> getAllStudents() {
-		return studentService.getStudent();
-=======
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,9 +16,17 @@ import com.example.student.service.StudentService;
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
-
 	@Autowired
 	private StudentService studentService;
+
+	@PostMapping
+	public ResponseEntity<?> save(@RequestBody Student student) {
+		return studentService.createStudent(student);
+	}
+	@GetMapping
+	public ResponseEntity<?> getAllStudents() {
+		return studentService.getStudent();
+	}
 
 	@GetMapping("{id}")
 	public ResponseEntity<?> getById(@PathVariable long id) {
@@ -51,6 +37,5 @@ public class StudentController {
 	public ResponseEntity<?> updateUser(@RequestBody Student student, @PathVariable long id) {
 		return studentService.updateUser(student, id);
 
->>>>>>> 9ee139ddce02409ddcee7f6a37a9e7b198bb90b6
 	}
 }
