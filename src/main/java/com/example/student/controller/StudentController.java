@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.student.Dto.StudentDTO;
 import com.example.student.entity.Student;
 import com.example.student.service.StudentService;
 
@@ -21,8 +22,8 @@ public class StudentController {
 	private StudentService studentService;
 
 	@PostMapping
-	public ResponseEntity<?> save(@RequestBody Student student) {
-		return studentService.createStudent(student);
+	public ResponseEntity<?> save(@RequestBody StudentDTO studentDTO) {
+		return studentService.createStudent(studentDTO);
 	}
 
 	@GetMapping
