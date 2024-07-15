@@ -7,8 +7,6 @@ import com.example.student.entity.Student;
 public interface StudentService {
 
 
-
-
 	public ResponseEntity<?> createStudent(Student student);
 
 	public ResponseEntity<?> getStudent();
@@ -17,8 +15,10 @@ public interface StudentService {
 
 	public ResponseEntity<?> updateUser(Student student, long id);
 
-	
-	public ResponseEntity<?> delete(long id);
-	}
 
+	public ResponseEntity<?> delete(long id);
+
+
+
+}
 
