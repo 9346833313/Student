@@ -35,14 +35,24 @@ public class FacultyController {
 	}
 
 	/**
-	 * Endpoint to find a faculty member by their ID. Map GET requests to
-	 * /facultys/{id} Call the service method to find the faculty member by ID
+	 * This method is used to call the Get faculty by id method which is present in
+	 * the faculty service interface.
+	 * 
+	 * 
+	 * @param id
+	 * @return
 	 */
 	@GetMapping("/facultys/{id}")
 	public ResponseEntity<?> findFacultyById(@PathVariable Long id) {
 		return facultyService.findFacultyById(id);
 	}
 
+	/**
+	 * This method is used to call the getAll method which is present in
+	 * facultyService interface.
+	 * 
+	 * @return
+	 */
 	@GetMapping("/facultys/all")
 	public ResponseEntity<?> getAllFaculty() {
 		return facultyService.getAllFaculty();
@@ -61,8 +71,10 @@ public class FacultyController {
 	}
 
 	/**
-	 * Endpoint to delete a faculty member by their ID. Map DELETE requests to
-	 * /facultys/{id} Call the service method to delete the faculty member by ID
+	 * This method is used to call the delete method which is present in
+	 * facultyService interface.
+	 * 
+	 * @param id
 	 */
 	@DeleteMapping("/facultys/{id}")
 	public ResponseEntity<?> deleteFaculty(@PathVariable long id) {
