@@ -20,7 +20,7 @@ public class LoggingAspect {
 
 	@Pointcut("execution(* com.example.springboot.controller.FacultyController.*(..))")
 	public void loggingPointCut() {
-		// Pointcut for all methods in UserController
+		// Pointcut for all methods in FacultyController
 	}
 
 	@Around("loggingPointCut()")
@@ -55,7 +55,7 @@ public class LoggingAspect {
 	private String getFacultyResponse(Object result) {
 		if (result instanceof Faculty) {
 			Faculty faculty = (Faculty) result;
-			return "User [fname=" + faculty.getFname() + ", fsubject=" + faculty.getFsubject() + ", description="
+			return "Faculty [fname=" + faculty.getFname() + ", fsubject=" + faculty.getFsubject() + ", description="
 					+ faculty.getDescription() + "]";
 		}
 		return "No Faculty data in the response";
