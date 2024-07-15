@@ -30,16 +30,7 @@ public class StudentController {
 	public ResponseEntity<?> getAllStudents() {
 		return studentService.getStudent();
 	}
-<<<<<<< HEAD
 
-
-
-
-	
-=======
->>>>>>> 5e38a7dc1098f8d60417182276111e24c9ada5fa
-
-	
 	@GetMapping("{id}")
 	public ResponseEntity<?> getById(@PathVariable long id) {
 		return studentService.getById(id);
@@ -49,10 +40,6 @@ public class StudentController {
 	public ResponseEntity<?> updateUser(@RequestBody Student student, @PathVariable long id) {
 		return studentService.updateUser(student, id);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5e38a7dc1098f8d60417182276111e24c9ada5fa
 	}
 
 	@DeleteMapping("{id}")
