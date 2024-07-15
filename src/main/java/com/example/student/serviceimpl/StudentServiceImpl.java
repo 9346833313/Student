@@ -135,6 +135,39 @@ public class StudentServiceImpl implements StudentService {
 	// Student details update by id - serviceImpl class
 	@Override
 	public ResponseEntity<?> updateUser(StudentDTO studentDto, long id) {
+
+		ResponseDto responseDto = new ResponseDto();
+
+		Optional<Student> findByRollNo = studentRepo.findByRollNo(studentDto.getRollNo());
+		if (findByRollNo.isPresent()) {
+			responseDto.setIsError(true);
+			responseDto.setStatusCode(400);
+			responseDto.setResult(new ResponseMessage("roll no is already present"));
+			return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
+		}
+		// validations for name
+
+		if (studentDto.getName() != null) {
+			Boolean validname = studentValidation.isValidname(studentDto.getName());
+			if (!validname) {
+				responseDto.setIsError(true);
+				responseDto.setStatusCode(400);
+				responseDto.setResult(new ResponseMessage("provide valid name with limitations"));
+				return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
+			}
+		}
+		// validations for roll no
+		Long rollNo = studentDto.getRollNo();
+		if (rollNo != null) {
+			Boolean validRollNo = studentValidation.isValidRollNo(studentDto.getRollNo());
+			if (!validRollNo) {
+				responseDto.setIsError(true);
+				responseDto.setStatusCode(400);
+				responseDto.setResult(new ResponseMessage("provide valid name with limitations"));
+				return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
+			}
+		}
+
 		Optional<Student> findById = studentRepo.findById(id);
 		if (findById.isPresent()) {
 			Student existingStudent = findById.get();
@@ -143,7 +176,6 @@ public class StudentServiceImpl implements StudentService {
 
 			studentRepo.save(existingStudent);
 
-			ResponseDto responseDto = new ResponseDto();
 			responseDto.setStatusCode(HttpStatus.OK.value());
 			responseDto.setIsError(false);
 			responseDto.setResult(new ResponseMessage("Student updated successfully"));
@@ -153,7 +185,6 @@ public class StudentServiceImpl implements StudentService {
 
 		else {
 
-			ResponseDto responseDto = new ResponseDto();
 			responseDto.setStatusCode(HttpStatus.NOT_FOUND.value());
 			responseDto.setIsError(true);
 			responseDto.setResult(new ResponseMessage("Student not found"));
@@ -161,16 +192,27 @@ public class StudentServiceImpl implements StudentService {
 		}
 	}
 
+	/* 
+	 * Student details delete by id
+	 *  - serviceImpl class 
+	 *  */
 	@Override
 	public ResponseEntity<?> delete(long id) {
+		ResponseDto responseDto = new ResponseDto();
 		Optional<Student> findById = studentRepo.findById(id);
 		if (findById.isPresent()) {
 			Student std = findById.get();
 
-			return new ResponseEntity<>(std, HttpStatus.OK);
-
+			responseDto.setStatusCode(HttpStatus.OK.value());
+			responseDto.setIsError(false);
+			responseDto.setResult(new ResponseMessage("Student deleted successfully"));
+			return ResponseEntity.ok(responseDto);
 		} else {
-			return new ResponseEntity<>("id not found", HttpStatus.BAD_REQUEST);
+			responseDto.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseDto.setIsError(true);
+			responseDto.setResult(new ResponseMessage("Student not found"));
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseDto);
+			
 		}
 
 	}
