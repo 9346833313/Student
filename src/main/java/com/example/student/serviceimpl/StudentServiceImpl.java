@@ -1,12 +1,17 @@
 package com.example.student.serviceimpl;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 
 import java.util.List;
+=======
+>>>>>>> 9b6799e5bf524ea2377e13c0f6e771bf5e08713a
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -71,36 +76,60 @@ public class StudentServiceImpl implements StudentService {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-	/*
-	 * 
-	 */
-	public ResponseEntity<?> getById(long id) {
-		Optional<Student> findById = studentRepo.findById(id);
-		if (findById.isPresent()) {
-			Student user = findById.get();
-			return new ResponseEntity<>(user, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-		}
-	}
-
+	
+	// Student details get by id - serviceImpl class
 	@Override
-	public ResponseEntity<?> updateUser(Student student, long id) {
-		Optional<Student> findById = studentRepo.findById(id);
-		if (findById.isPresent()) {
-			Student existingStudent = findById.get();
+    public ResponseEntity<ResponseDto> getById(long id) {
+        Optional<Student> findById = studentRepo.findById(id);
+        if (findById.isPresent()) {
+            Student student = findById.get();
+            StudentDTO studentDTO = new StudentDTO();
+            studentDTO.setId(student.getId());
+            studentDTO.setName(student.getName());
+            studentDTO.setRollNo(student.getRollNo());
 
-			existingStudent.setName(student.getName());
-			existingStudent.setRollNo(student.getRollNo());
+            ResponseDto responseDto = new ResponseDto();
+            responseDto.setStatusCode(HttpStatus.OK.value());
+            responseDto.setIsError(false);
+            responseDto.setResult(studentDTO);
+            return ResponseEntity.ok(responseDto);
+        } else {
+            ResponseDto responseDto = new ResponseDto();
+            responseDto.setStatusCode(HttpStatus.NOT_FOUND.value());
+            responseDto.setIsError(true);
+            responseDto.setResult(new ResponseMessage("User not found"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseDto);
+        }
+    }
 
-			studentRepo.save(existingStudent);
-			return new ResponseEntity<>("Student updated successfully", HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
-		}
+	// Student details update by id - serviceImpl class
+    @Override
+    public ResponseEntity<ResponseDto> updateUser(StudentDTO studentDto, long id) {
+        Optional<Student> findById = studentRepo.findById(id);
+        if (findById.isPresent()) {
+            Student existingStudent = findById.get();
+            existingStudent.setName(studentDto.getName());
+            existingStudent.setRollNo(studentDto.getRollNo());
 
+<<<<<<< HEAD
 	}
+=======
+            studentRepo.save(existingStudent);
+
+            ResponseDto responseDto = new ResponseDto();
+            responseDto.setStatusCode(HttpStatus.OK.value());
+            responseDto.setIsError(false);
+            responseDto.setResult(new ResponseMessage("Student updated successfully"));
+            return ResponseEntity.ok(responseDto);
+        } else {
+            ResponseDto responseDto = new ResponseDto();
+            responseDto.setStatusCode(HttpStatus.NOT_FOUND.value());
+            responseDto.setIsError(true);
+            responseDto.setResult(new ResponseMessage("Student not found"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseDto);
+        }
+    }
+>>>>>>> 9b6799e5bf524ea2377e13c0f6e771bf5e08713a
 
 	@Override
 	public ResponseEntity<?> delete(long id) {
