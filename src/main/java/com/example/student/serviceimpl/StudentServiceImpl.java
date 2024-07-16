@@ -28,9 +28,13 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 
-	/*
-	 *
+	/**
 	 * Creates a new student.
+	 * 
+	 * @param studentDTO The DTO containing student information to be created.
+	 * 
+	 * @return ResponseEntity containing the result of the creation operation and
+	 *         HTTP status.
 	 */
 
 	public ResponseEntity<?> createStudent(StudentDTO studentDTO) {
@@ -86,8 +90,10 @@ public class StudentServiceImpl implements StudentService {
 		}
 	}
 
-	/*
-	 * Retrieves all students
+	/**
+	 * Retrieves all students.
+	 *
+	 * @return ResponseEntity containing the list of all students and HTTP status.
 	 */
 
 	@Override
@@ -107,7 +113,12 @@ public class StudentServiceImpl implements StudentService {
 		}
 	}
 
-	// Student details get by id - serviceImpl class
+	/**
+	 * Retrieves a student by ID.
+	 *
+	 * @param id The ID of the student to retrieve.
+	 * @return ResponseEntity containing the retrieved student and HTTP status.
+	 */
 	@Override
 	public ResponseEntity<?> getById(long id) {
 		Optional<Student> findById = studentRepo.findById(id);
@@ -132,7 +143,14 @@ public class StudentServiceImpl implements StudentService {
 		}
 	}
 
-	// Student details update by id - serviceImpl class
+	/**
+	 * Updates an existing student.
+	 *
+	 * @param id         The ID of the student to update.
+	 * @param studentDTO The DTO containing updated student information.
+	 * @return ResponseEntity containing the result of the update operation and HTTP
+	 *         status.
+	 */
 	@Override
 	public ResponseEntity<?> updateUser(StudentDTO studentDto, long id) {
 
@@ -192,27 +210,30 @@ public class StudentServiceImpl implements StudentService {
 		}
 	}
 
-	/* 
-	 * Student details delete by id
-	 *  - serviceImpl class 
-	 *  */
+	/**
+	 * Deletes a student by ID.
+	 *
+	 * @param id The ID of the student to delete.
+	 * @return ResponseEntity containing the result of the delete operation and HTTP
+	 *         status.
+	 */
 	@Override
 	public ResponseEntity<?> delete(long id) {
 		ResponseDto responseDto = new ResponseDto();
 		Optional<Student> findById = studentRepo.findById(id);
 		if (findById.isPresent()) {
 			Student std = findById.get();
-
-			responseDto.setStatusCode(HttpStatus.OK.value());
+			studentRepo.delete(std);
+			responseDto.setStatusCode(200);
 			responseDto.setIsError(false);
 			responseDto.setResult(new ResponseMessage("Student deleted successfully"));
-			return ResponseEntity.ok(responseDto);
+			return new ResponseEntity<>(responseDto,HttpStatus.OK);
 		} else {
 			responseDto.setStatusCode(HttpStatus.NOT_FOUND.value());
 			responseDto.setIsError(true);
 			responseDto.setResult(new ResponseMessage("Student not found"));
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseDto);
-			
+
 		}
 
 	}
