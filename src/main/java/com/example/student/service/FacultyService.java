@@ -8,7 +8,7 @@ public interface FacultyService {
 
 	ResponseEntity<?> createFaculty(FacultyReqDto facultyReqDto);
 
-	ResponseEntity<?> findFacultyById(Long facultyId);
+	ResponseEntity<?> getFacultyById(Long facultyId);
 
 	ResponseEntity<?> getAllFaculty();
 

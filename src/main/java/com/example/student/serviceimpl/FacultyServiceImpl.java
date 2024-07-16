@@ -48,10 +48,27 @@ public class FacultyServiceImpl implements FacultyService {
 						"FName must be between 1 to 30 characters and only alphabets , “.” and “'” are allowed, should not begin or end with dot"));
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}
-
 			faculty.setFname(facultyReqDto.getFname());
+
+			boolean validSubject = facultyValidationService.isValidSubject(facultyReqDto.getFsubject());
+			if (!validSubject) {
+				response.setStatusCode(400);
+				response.setIsError(true);
+				response.setResult(new ResponseMessage(
+						"FSubject must be between 1 to 30 characters and only alphabets , “.” and “'” are allowed, should not begin or end with dot"));
+				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+			}
 			faculty.setFsubject(facultyReqDto.getFsubject());
+
+			boolean isvalidDescription = facultyValidationService.isValidDescription(facultyReqDto.getDescription());
+			if (!isvalidDescription) {
+				response.setStatusCode(400);
+				response.setIsError(true);
+				response.setResult(new ResponseMessage(
+						"Description must be between 2 to 300 characters and allowed all the characters and not begin with “.” "));
+			}
 			faculty.setDescription(facultyReqDto.getDescription());
+
 			facultyRepository.save(faculty);
 
 			response.setStatusCode(200);
@@ -76,7 +93,7 @@ public class FacultyServiceImpl implements FacultyService {
 	 * 
 	 */
 	@Override
-	public ResponseEntity<?> findFacultyById(Long id) {
+	public ResponseEntity<?> getFacultyById(Long id) {
 		ResponseDto response = new ResponseDto();
 
 		try {
@@ -106,7 +123,7 @@ public class FacultyServiceImpl implements FacultyService {
 			response.setStatusCode(500);
 			response.setIsError(true);
 			response.setResult(new ResponseMessage(
-					"Technical Error Occured, Unable to save Faculty. Error Message: " + e.getMessage()));
+					"Technical Error Occured, Unable to get Faculty by Id. Error Message: " + e.getMessage()));
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -129,13 +146,14 @@ public class FacultyServiceImpl implements FacultyService {
 			response.setStatusCode(500);
 			response.setIsError(true);
 			response.setResult(new ResponseMessage(
-					"Technical Error Occured, Unable to getAll Faculty. Error Message: " + e.getMessage()));
+					"Technical Error Occured, Unable to get Faculty. Error Message: " + e.getMessage()));
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	/**
-	 * This method is used to Update faculty name, subject and description
+	 * This method is used to Update faculty name, subject and description based on
+	 * Faculty Id
 	 * 
 	 * @param facultyReqDto contains faculty details
 	 * @return response object
@@ -155,9 +173,37 @@ public class FacultyServiceImpl implements FacultyService {
 			} else {
 
 				Faculty faculty = findById.get();
+
+				boolean validFName = facultyValidationService.isValidFName(facultyReqDto.getFname());
+				if (!validFName) {
+					response.setStatusCode(400);
+					response.setIsError(true);
+					response.setResult(new ResponseMessage(
+							"FName must be between 1 to 30 characters and only alphabets , “.” and “'” are allowed, should not begin or end with dot"));
+					return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+				}
 				faculty.setFname(facultyReqDto.getFname());
+
+				boolean validSubject = facultyValidationService.isValidSubject(facultyReqDto.getFsubject());
+				if (!validSubject) {
+					response.setStatusCode(400);
+					response.setIsError(true);
+					response.setResult(new ResponseMessage(
+							"FSubject must be between 1 to 30 characters and only alphabets , “.” and “'” are allowed, should not begin or end with dot"));
+					return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+				}
 				faculty.setFsubject(facultyReqDto.getFsubject());
+
+				boolean isvalidDescription = facultyValidationService
+						.isValidDescription(facultyReqDto.getDescription());
+				if (!isvalidDescription) {
+					response.setStatusCode(400);
+					response.setIsError(true);
+					response.setResult(new ResponseMessage(
+							"Description must be between 2 to 300 characters and allowed all the characters and not begin with “.” "));
+				}
 				faculty.setDescription(facultyReqDto.getDescription());
+
 				facultyRepository.save(faculty);
 
 				response.setStatusCode(200);
@@ -176,7 +222,7 @@ public class FacultyServiceImpl implements FacultyService {
 	}
 
 	/**
-	 * This method is used to delete the faculty from database based on id
+	 * This method is used to delete the faculty from database based on faculty Id
 	 * 
 	 * @param facultyId
 	 */

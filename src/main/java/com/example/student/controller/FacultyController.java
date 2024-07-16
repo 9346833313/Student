@@ -43,8 +43,8 @@ public class FacultyController {
 	 * @return
 	 */
 	@GetMapping("/facultys/{id}")
-	public ResponseEntity<?> findFacultyById(@PathVariable Long id) {
-		return facultyService.findFacultyById(id);
+	public ResponseEntity<?> getFacultyById(@PathVariable Long id) {
+		return facultyService.getFacultyById(id);
 	}
 
 	/**
